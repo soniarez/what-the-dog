@@ -8,20 +8,10 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import getAllBreedList from "../../helpers/getAllBreedList";
 
-const SideBar = ({currentSelected}) => {
+const SideBar = ({updateCurrentSelected}) => {
   const [hamburgerMenu, setHamburgerMenu] = useState(false);
   const [open, setOpen] = useState(false);
   const [breeds, setBreeds] = useState([]);
-
-  const [selectedBreed, setSelectedBreed] = useState([]);
-
-  const addSelectedBreed = (breed) => {
-    if (selectedBreed.includes(breed)) {
-      setSelectedBreed(selectedBreed.filter((item) => item !== breed));
-    } else {
-      setSelectedBreed([...selectedBreed, breed]);
-    }
-  }
 
   useEffect(() => {
     const getAllDogs = async () => {
@@ -45,11 +35,10 @@ const SideBar = ({currentSelected}) => {
   };
 
   const handleClick = (e) => {
-    console.log(e.currentTarget.id);
+    //console.log(e.currentTarget.id);
     setOpen(!open);
-    addSelectedBreed(e.currentTarget.id);
-    console.log(selectedBreed)
-    setSelectedBreed(selectedBreed);
+    updateCurrentSelected(e.currentTarget.id);
+    //console.log(selectedBreed)
   };
 
   //aca estamos sacando una lista de nombres de perro exrtayendo las llaves esto es una lista de string
@@ -123,8 +112,8 @@ const SideBar = ({currentSelected}) => {
                   {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                  {breeds[breed].map((subBreed, _subIndex) => (
-                    <List key={_subIndex} component="div" disablePadding>
+                  {breeds[breed].map((subBreed, index) => (
+                    <List key={index} component="div" disablePadding>
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemText primary={subBreed} />
                       </ListItemButton>

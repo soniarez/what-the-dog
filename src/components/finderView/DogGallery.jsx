@@ -9,18 +9,19 @@ const DogGallery = ({selectedBreed}) => {
     const getAllImages = async () => {
       try {
         const imagesFromApi = await getBreedImages(selectedBreed);
-        //console.log(imagesFromApi)
+        //console.log(selectedBreed)
         setDogImages(imagesFromApi);
       } catch (err) {
         console.log(err, "error fetching data from API");
       }
     };
     getAllImages();
-  }, []);
+  }, [selectedBreed]);
 
   return (
-    <div className="flex flex-col w-full h-screen">
+    <div key={selectedBreed.length} className="flex flex-col w-full h-screen">
       <p className="self-center">Dog Gallery</p>
+      <p>{`${selectedBreed.length}`}</p>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 4 }}>
         <Masonry columnsCount={3} gutter="10px">
           {dogImages
