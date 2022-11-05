@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -9,6 +10,8 @@ import getAllBreedList from "../../helpers/getAllBreedList";
 import getBreedImages from "../../helpers/getBreedImages";
 
 const SideBar = () => {
+  const [hamburgerMenu, setHamburgerMenu] = useState(false);
+
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(false);
   const [breeds, setBreeds] = useState([]);
@@ -20,7 +23,7 @@ const SideBar = () => {
         dogConverter(dogsFromApi);
         setBreeds(dogsFromApi.message);
         const imagesFromApi = await getBreedImages("akita");
-        setDogImages(imagesFromApi)
+        setDogImages(imagesFromApi);
       } catch (err) {
         console.log(err, "error fetching data from API");
       }
@@ -43,9 +46,10 @@ const SideBar = () => {
   const listOfBreeds = Object.keys(breeds);
 
   return (
-    <div>
+    <div className="overflow-scroll overflow-x-hidden h-screen">
       {listOfBreeds.map((dog, index) => (
         <List
+          className="hidden md:flex md:flex-col md:justify-center md:items-center"
           key={index}
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           component="nav"
@@ -77,6 +81,50 @@ const SideBar = () => {
           )}
         </List>
       ))}
+
+      {/*Hambuerger Menu*/}
+      <div
+        onClick={() => setHamburgerMenu(!hamburgerMenu)}
+        className="cursor-pointer pr-4 z-10 md:hidden"
+      >
+        {hamburgerMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
+      </div>
+
+      {hamburgerMenu &&
+        listOfBreeds.map((dog, index) => (
+          <List
+            className="flex flex-col justify-center items-center "
+            key={index}
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+          >
+            {breeds[dog].length === 0 ? (
+              <ListItemButton
+                selected={selected}
+                onClick={() => setSelected(!selected)}
+              >
+                <ListItemText primary={dog} />
+              </ListItemButton>
+            ) : (
+              <>
+                <ListItemButton onClick={handleClick}>
+                  <ListItemText primary={dog} />
+                  {open ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  {breeds[dog].map((subBreed, _subIndex) => (
+                    <List key={_subIndex} component="div" disablePadding>
+                      <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemText primary={subBreed} />
+                      </ListItemButton>
+                    </List>
+                  ))}
+                </Collapse>
+              </>
+            )}
+          </List>
+        ))}
     </div>
   );
 };

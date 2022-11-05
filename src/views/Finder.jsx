@@ -8,7 +8,7 @@ const Finder = () => {
       <div className="min-w-fit max-w-fit">
         <SideBar />
       </div>
-      <div className=" flex flex-col items-center border border-gray-500 px-12 w-full">
+      <div className=" flex flex-col justify-center items-center border border-gray-500 px-12 w-full">
         <h1 className="text-4xl font-semibold">Find your Dog</h1>
         <DogGallery />
       </div>
