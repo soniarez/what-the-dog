@@ -23,13 +23,13 @@ const DogGallery = () => {
 
     <div className="flex flex-col justify-center items-center h-screen">
       <p>Dog Gallery</p>
-      <ImageList variant="masonry" cols={3} gap={8} className="sm:columns-2">
+      <ImageList variant="masonry" cols={3} gap={8} >
         {dogImages.map((item) => (
           <ImageListItem key={item.img}>
             <img
               src={`${item}?w=248&fit=crop&auto=format`}
               srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item}
+              alt="dog pictures"
               loading="lazy"
             />
           </ImageListItem>
