@@ -1,13 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import axios from "axios";
 
 const SideBar = () => {
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(false);
+  const [animal, setAnimal] = useState(null);
+
+  
+useEffect(() => {
+  const getDogs = async () => {
+    try {
+      const dogsFromApi = await fetchDogs();
+      console.log(dogsFromApi, "dogs from api");
+      setAnimal(dogsFromApi);
+    } catch (err) {
+      console.log(err, "error fetching data from API");
+    }
+  }
+  getDogs();
+}, []);
+
+  //FETCHING DOG DATA FROM API
+const fetchDogs = async () => {
+  try {
+    let res = await axios.get("https://dog.ceo/api/breeds/list/all");
+    let data = await res.data;
+    return data;
+  } catch (err) {
+    if (err.response) {
+      console.log(err.response.status);
+      console.log(err.response.data)
+    }
+  }
+}
 
   const handleClick = () => {
     setOpen(!open);
@@ -41,7 +72,7 @@ const SideBar = () => {
           aria-labelledby="nested-list-subheader"
         >
           {dog.subBreed.length === 0 ? (
-            <ListItemButton>
+            <ListItemButton selected={selected} onClick={()=>setSelected(!selected)}>
               <ListItemText primary={dog.breed} />
             </ListItemButton>
           ) : (
