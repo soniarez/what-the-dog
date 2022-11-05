@@ -6,6 +6,7 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import axios from "axios";
+import getBreedImages from "../../helpers/getBreedImages";
 
 const SideBar = () => {
   const [open, setOpen] = useState(false);
@@ -13,16 +14,18 @@ const SideBar = () => {
   const [breeds, setBreeds] = useState([]);
 
   useEffect(() => {
-    const getDogs = async () => {
+    const getAllDogs = async () => {
       try {
-        const dogsFromApi = await fetchDogs();
+        const dogsFromApi = await fetchAllDogs();
         dogConverter(dogsFromApi);
         setBreeds(dogsFromApi.message);
+        const imagesFromApi = await getBreedImages("akita");
+        setDogImages(imagesFromApi)
       } catch (err) {
         console.log(err, "error fetching data from API");
       }
     };
-    getDogs();
+    getAllDogs();
   }, []);
 
   //CONVERTING OBJECT INTO ARRAY
@@ -33,7 +36,7 @@ const SideBar = () => {
   };
 
   //FETCHING DOG DATA FROM API
-  const fetchDogs = async () => {
+  const fetchAllDogs = async () => {
     try {
       let res = await axios.get("https://dog.ceo/api/breeds/list/all");
       let breedsObject = await res.data;
@@ -45,6 +48,7 @@ const SideBar = () => {
       }
     }
   };
+
 
   const handleClick = () => {
     setOpen(!open);
