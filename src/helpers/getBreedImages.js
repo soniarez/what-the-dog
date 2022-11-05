@@ -4,9 +4,9 @@ import axios from "axios";
 const getBreedImages = async (breedName) => {
     try {
       let res = await axios.get(`https://dog.ceo/api/breed/${breedName}/images`);
-      let breedsObject = await res.data;
-      console.log(breedsObject, "breeds Obj Images")
-      return breedsObject;
+      let breedsImageObject = await res.data;
+      console.log(breedsImageObject, "breeds Obj Images")
+      return breedsImageObject;
     } catch (err) {
       if (err.response) {
         console.log(err.response.status);

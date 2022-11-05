@@ -17,7 +17,7 @@ const DogGallery = () => {
       }, []);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <p>Dog Gallery</p>
       <ul>
         {dogImages.map((image) => (

@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import axios from "axios";
+import getAllBreedList from "../../helpers/getAllBreedList";
 import getBreedImages from "../../helpers/getBreedImages";
 
 const SideBar = () => {
@@ -16,7 +16,7 @@ const SideBar = () => {
   useEffect(() => {
     const getAllDogs = async () => {
       try {
-        const dogsFromApi = await fetchAllDogs();
+        const dogsFromApi = await getAllBreedList();
         dogConverter(dogsFromApi);
         setBreeds(dogsFromApi.message);
         const imagesFromApi = await getBreedImages("akita");
@@ -34,21 +34,6 @@ const SideBar = () => {
       return rawDogs.message[breed];
     }
   };
-
-  //FETCHING DOG DATA FROM API
-  const fetchAllDogs = async () => {
-    try {
-      let res = await axios.get("https://dog.ceo/api/breeds/list/all");
-      let breedsObject = await res.data;
-      return breedsObject;
-    } catch (err) {
-      if (err.response) {
-        console.log(err.response.status);
-        console.log(err.response.data);
-      }
-    }
-  };
-
 
   const handleClick = () => {
     setOpen(!open);
