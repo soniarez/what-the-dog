@@ -14,7 +14,7 @@ const Home = () => {
         alt="dog gif"
       ></img>
       <button
-        onClick={() => navigate("/dogfinder")}
+        onClick={() => navigate("/finder")}
         className="bg-[#7938ad] hover:bg-[#5e43d1] text-white font-bold py-2 px-4 rounded mt-20"
         type="button"
       >
