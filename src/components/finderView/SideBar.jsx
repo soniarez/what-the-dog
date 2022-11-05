@@ -20,7 +20,7 @@ const SideBar = () => {
     const getAllDogs = async () => {
       try {
         const dogsFromApi = await getAllBreedList();
-        dogConverter(dogsFromApi);
+        breedArray(dogsFromApi);
         setBreeds(dogsFromApi.message);
         const imagesFromApi = await getBreedImages("akita");
         setDogImages(imagesFromApi);
@@ -32,9 +32,9 @@ const SideBar = () => {
   }, []);
 
   //CONVERTING OBJECT INTO ARRAY
-  const dogConverter = (rawDogs) => {
-    for (const breed in rawDogs.message) {
-      return rawDogs.message[breed];
+  const breedArray = (breedObjects) => {
+    for (const breed in breedObjects.message) {
+      return breedObjects.message[breed];
     }
   };
 
@@ -47,7 +47,7 @@ const SideBar = () => {
 
   return (
     <div className="overflow-scroll overflow-x-hidden h-screen">
-      {listOfBreeds.map((dog, index) => (
+      {listOfBreeds.map((breed, index) => (
         <List
           className="hidden md:flex md:flex-col md:justify-center md:items-center"
           key={index}
@@ -55,21 +55,21 @@ const SideBar = () => {
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
-          {breeds[dog].length === 0 ? (
+          {breeds[breed].length === 0 ? (
             <ListItemButton
               selected={selected}
               onClick={() => setSelected(!selected)}
             >
-              <ListItemText primary={dog} />
+              <ListItemText primary={breed} />
             </ListItemButton>
           ) : (
             <>
               <ListItemButton onClick={handleClick}>
-                <ListItemText primary={dog} />
+                <ListItemText primary={breed} />
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                {breeds[dog].map((subBreed, _subIndex) => (
+                {breeds[breed].map((subBreed, _subIndex) => (
                   <List key={_subIndex} component="div" disablePadding>
                     <ListItemButton sx={{ pl: 4 }}>
                       <ListItemText primary={subBreed} />
@@ -91,7 +91,7 @@ const SideBar = () => {
       </div>
 
       {hamburgerMenu &&
-        listOfBreeds.map((dog, index) => (
+        listOfBreeds.map((breed, index) => (
           <List
             className="flex flex-col justify-center items-center "
             key={index}
@@ -99,21 +99,21 @@ const SideBar = () => {
             component="nav"
             aria-labelledby="nested-list-subheader"
           >
-            {breeds[dog].length === 0 ? (
+            {breeds[breed].length === 0 ? (
               <ListItemButton
                 selected={selected}
                 onClick={() => setSelected(!selected)}
               >
-                <ListItemText primary={dog} />
+                <ListItemText primary={breed} />
               </ListItemButton>
             ) : (
               <>
                 <ListItemButton onClick={handleClick}>
-                  <ListItemText primary={dog} />
+                  <ListItemText primary={breed} />
                   {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                  {breeds[dog].map((subBreed, _subIndex) => (
+                  {breeds[breed].map((subBreed, _subIndex) => (
                     <List key={_subIndex} component="div" disablePadding>
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemText primary={subBreed} />
