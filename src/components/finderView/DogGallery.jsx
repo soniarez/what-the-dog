@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import getBreedImages from "../../helpers/getBreedImages";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
-const DogGallery = () => {
+const DogGallery = ({selectedBreed}) => {
   const [dogImages, setDogImages] = useState([]);
 
   useEffect(() => {
     const getAllImages = async () => {
       try {
-        const imagesFromApi = await getBreedImages("beagle");
-        setDogImages(imagesFromApi.message);
+        const imagesFromApi = await getBreedImages(selectedBreed);
+        //console.log(imagesFromApi)
+        setDogImages(imagesFromApi);
       } catch (err) {
         console.log(err, "error fetching data from API");
       }

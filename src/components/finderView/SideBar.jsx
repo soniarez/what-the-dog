@@ -7,14 +7,21 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import getAllBreedList from "../../helpers/getAllBreedList";
-import getBreedImages from "../../helpers/getBreedImages";
 
-const SideBar = () => {
+const SideBar = ({currentSelected}) => {
   const [hamburgerMenu, setHamburgerMenu] = useState(false);
-
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(false);
   const [breeds, setBreeds] = useState([]);
+
+  const [selectedBreed, setSelectedBreed] = useState([]);
+
+  const addSelectedBreed = (breed) => {
+    if (selectedBreed.includes(breed)) {
+      setSelectedBreed(selectedBreed.filter((item) => item !== breed));
+    } else {
+      setSelectedBreed([...selectedBreed, breed]);
+    }
+  }
 
   useEffect(() => {
     const getAllDogs = async () => {
@@ -22,7 +29,6 @@ const SideBar = () => {
         const dogsFromApi = await getAllBreedList();
         breedArray(dogsFromApi);
         setBreeds(dogsFromApi.message);
-        const imagesFromApi = await getBreedImages("akita");
         //setDogImages(imagesFromApi);
       } catch (err) {
         console.log(err, "error fetching data from API");
@@ -38,8 +44,12 @@ const SideBar = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    console.log(e.currentTarget.id);
     setOpen(!open);
+    addSelectedBreed(e.currentTarget.id);
+    console.log(selectedBreed)
+    setSelectedBreed(selectedBreed);
   };
 
   //aca estamos sacando una lista de nombres de perro exrtayendo las llaves esto es una lista de string
@@ -57,21 +67,21 @@ const SideBar = () => {
         >
           {breeds[breed].length === 0 ? (
             <ListItemButton
-              selected={selected}
-              onClick={() => setSelected(!selected)}
+              onClick={handleClick}
+              id={breed}
             >
               <ListItemText primary={breed} />
             </ListItemButton>
           ) : (
             <>
-              <ListItemButton onClick={handleClick}>
+              <ListItemButton onClick={handleClick} id={breed}>
                 <ListItemText primary={breed} />
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                {breeds[breed].map((subBreed, _subIndex) => (
-                  <List key={_subIndex} component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                {breeds[breed].map((subBreed, index) => (
+                  <List key={index} component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }} onClick={handleClick} id={subBreed}>
                       <ListItemText primary={subBreed} />
                     </ListItemButton>
                   </List>
