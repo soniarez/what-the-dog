@@ -20,8 +20,8 @@ const getBreedImages = async (breedNames) => {
       }
     }
   }
-//console.log(dogImageListToRender, "dogImageListToRender");
 
+  //SORTING RAMDOMLY THE IMAGES
   dogImageListToRender.sort(() => Math.random() - 0.5);
   return dogImageListToRender;
 };

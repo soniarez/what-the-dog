@@ -19,7 +19,6 @@ const SideBar = ({updateCurrentSelected}) => {
         const dogsFromApi = await getAllBreedList();
         breedArray(dogsFromApi);
         setBreeds(dogsFromApi.message);
-        //setDogImages(imagesFromApi);
       } catch (err) {
         console.log(err, "error fetching data from API");
       }
@@ -35,10 +34,8 @@ const SideBar = ({updateCurrentSelected}) => {
   };
 
   const handleClick = (e) => {
-    //console.log(e.currentTarget.id);
     setOpen(!open);
     updateCurrentSelected(e.currentTarget.id);
-    //console.log(selectedBreed)
   };
 
   //aca estamos sacando una lista de nombres de perro exrtayendo las llaves esto es una lista de string
