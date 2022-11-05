@@ -34,9 +34,12 @@ const SideBar = ({updateCurrentSelected}) => {
   };
 
   const handleClick = (e) => {
-    setOpen(!open);
     updateCurrentSelected(e.currentTarget.id);
   };
+
+  const handleClickSubBreedsMenu = (e) => {
+    setOpen(!open);
+  }
 
   //aca estamos sacando una lista de nombres de perro exrtayendo las llaves esto es una lista de string
   const listOfBreeds = Object.keys(breeds);
@@ -60,14 +63,14 @@ const SideBar = ({updateCurrentSelected}) => {
             </ListItemButton>
           ) : (
             <>
-              <ListItemButton onClick={handleClick} id={breed}>
+              <ListItemButton onClick={handleClickSubBreedsMenu} id={breed}>
                 <ListItemText primary={breed} />
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={open} timeout="auto" unmountOnExit>
                 {breeds[breed].map((subBreed, index) => (
                   <List key={index} component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} onClick={handleClick} id={subBreed}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={handleClick} id={breed+"/"+subBreed}>
                       <ListItemText primary={subBreed} />
                     </ListItemButton>
                   </List>

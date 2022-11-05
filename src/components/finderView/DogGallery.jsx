@@ -21,7 +21,6 @@ const DogGallery = ({selectedBreed}) => {
   return (
     <div key={selectedBreed.length} className="flex flex-col w-full h-screen">
       <p className="self-center">Dog Gallery</p>
-      <p>{`${selectedBreed.length}`}</p>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 4 }}>
         <Masonry columnsCount={3} gutter="10px">
           {dogImages
