@@ -23,7 +23,7 @@ const SideBar = () => {
         breedArray(dogsFromApi);
         setBreeds(dogsFromApi.message);
         const imagesFromApi = await getBreedImages("akita");
-        setDogImages(imagesFromApi);
+        //setDogImages(imagesFromApi);
       } catch (err) {
         console.log(err, "error fetching data from API");
       }
@@ -90,7 +90,7 @@ const SideBar = () => {
         {hamburgerMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
       </div>
 
-      {hamburgerMenu &&
+      {hamburgerMenu ?
         listOfBreeds.map((breed, index) => (
           <List
             className="flex flex-col justify-center items-center "
@@ -124,7 +124,7 @@ const SideBar = () => {
               </>
             )}
           </List>
-        ))}
+        )) : null}
     </div>
   );
 };

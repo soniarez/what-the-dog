@@ -1,53 +1,42 @@
 import React, { useState, useEffect } from "react";
 import getBreedImages from "../../helpers/getBreedImages";
-import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 const DogGallery = () => {
-    const [dogImages, setDogImages] = useState([]);
+  const [dogImages, setDogImages] = useState([]);
 
-    useEffect(() => {
-        const getAllImages= async () => {
-          try {
-            const imagesFromApi = await getBreedImages("beagle");
-            setDogImages(imagesFromApi.message)
-          } catch (err) {
-            console.log(err, "error fetching data from API");
-          }
-        };
-        getAllImages();
-      }, []);
+  useEffect(() => {
+    const getAllImages = async () => {
+      try {
+        const imagesFromApi = await getBreedImages("beagle");
+        setDogImages(imagesFromApi.message);
+      } catch (err) {
+        console.log(err, "error fetching data from API");
+      }
+    };
+    getAllImages();
+  }, []);
 
   return (
-
-    <div className="flex flex-col justify-center items-center h-screen">
-      <p>Dog Gallery</p>
-      <ImageList variant="masonry" cols={3} gap={8} >
-        {dogImages.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item}?w=248&fit=crop&auto=format`}
-              srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt="dog pictures"
-              loading="lazy"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-  
-
-    
-    {/*   <ul>
-        {dogImages.map((image) => (
-          <li>
-            <img src={image}></img>
-          </li>
-        ))}
-      </ul> */}
+    <div className="flex flex-col w-full h-screen">
+      <p className="self-center">Dog Gallery</p>
+      <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 4 }}>
+        <Masonry columnsCount={3} gutter="10px">
+          {dogImages
+            ? dogImages.map((item, index) => (
+                <img
+                  src={item}
+                  key={index}
+                  alt="dog pictures"
+                  style={{ width: "100%", display: "block" }}
+                />
+              ))
+            : null}
+        </Masonry>
+      </ResponsiveMasonry>
     </div>
-
-
   );
 };
 
