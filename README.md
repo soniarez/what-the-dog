@@ -5,7 +5,7 @@ A web-based application where you can serch dog pictures by breed or sub-breed.
 
 ## Demo
 You can find it 👉
-[here](https://scl-020-burger-queen-c5r7ruz4g-soniarez.vercel.app/)
+[here](https://what-the-dog.vercel.app/)
 
 ## Features
 - Search dogs by breed or sub-breed. You can select one or more breed and sub-breeds to compare the randomly sorted pictures!
