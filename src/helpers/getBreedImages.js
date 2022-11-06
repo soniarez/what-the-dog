@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// FETCH ALL DOG IMAGES
+// FETCHING ALL DOG IMAGES
 const getBreedImages = async (breedNames) => {
   let dogImageListToRender = [];
   //console.log(breedNames)
@@ -11,7 +11,6 @@ const getBreedImages = async (breedNames) => {
         `https://dog.ceo/api/breed/${breedNames[i]}/images`
       );
       let breedsImageList =  res.data.message;
-      //console.log(breedsImageList, "breeds Obj Images");
       dogImageListToRender = dogImageListToRender.concat(breedsImageList);
     } catch (err) {
       if (err.response) {

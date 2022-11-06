@@ -26,7 +26,7 @@ const SideBar = ({updateCurrentSelected}) => {
     getAllDogs();
   }, []);
 
-  //CONVERTING OBJECT INTO ARRAY
+  //CONVERTING OBJECT INTO ARRAY OF DOG BREEDS
   const breedArray = (breedObjects) => {
     for (const breed in breedObjects.message) {
       return breedObjects.message[breed];
@@ -41,7 +41,7 @@ const SideBar = ({updateCurrentSelected}) => {
     setOpen(!open);
   }
 
-  //aca estamos sacando una lista de nombres de perro exrtayendo las llaves esto es una lista de string
+  //Retrieving a list of dog's names by adding the keys, this is a list of strings.
   const listOfBreeds = Object.keys(breeds);
 
   return (
@@ -51,7 +51,6 @@ const SideBar = ({updateCurrentSelected}) => {
         <List
           className="hidden md:flex md:flex-col md:justify-center md:items-center"
           key={index}
-         /*  sx={{ width: "100%", maxWidth: 360 }} */
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
@@ -82,6 +81,7 @@ const SideBar = ({updateCurrentSelected}) => {
         </List>
       ))}
 
+
       {/*Hamburger Menu Mobile*/}
       <div
         onClick={() => setHamburgerMenu(!hamburgerMenu)}
@@ -95,7 +95,6 @@ const SideBar = ({updateCurrentSelected}) => {
           <List
             className="flex flex-col justify-center items-center "
             key={index}
-            /* sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }} */
             component="nav"
             aria-labelledby="nested-list-subheader"
           >
@@ -124,7 +123,7 @@ const SideBar = ({updateCurrentSelected}) => {
               </>
             )}
           </List>
-        )) : null}
+        )) : <p>Data is loading...</p>}
     </div>
   );
 };
