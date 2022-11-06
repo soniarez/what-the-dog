@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import List from "@mui/material/List";;
+import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
@@ -8,7 +8,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import getAllBreedList from "../../helpers/getAllBreedList";
 
-const SideBar = ({updateCurrentSelected}) => {
+const SideBar = ({ updateCurrentSelected }) => {
   const [hamburgerMenu, setHamburgerMenu] = useState(false);
   const [open, setOpen] = useState(false);
   const [breeds, setBreeds] = useState([]);
@@ -39,14 +39,16 @@ const SideBar = ({updateCurrentSelected}) => {
 
   const handleClickSubBreedsMenu = (e) => {
     setOpen(!open);
-  }
+  };
 
   //Retrieving a list of dog's names by adding the keys, this is a list of strings.
   const listOfBreeds = Object.keys(breeds);
 
   return (
     <div className="overflow-scroll overflow-x-hidden h-screen ">
-      <h2 className="text-center text-lg text-indigo-600 font-black underline cursor-default">All Dog Breeds</h2>
+      <h2 className="text-center text-lg text-indigo-600 font-black underline cursor-default">
+        All Dog Breeds
+      </h2>
       {listOfBreeds.map((breed, index) => (
         <List
           className="hidden md:flex md:flex-col md:justify-center md:items-center"
@@ -55,10 +57,7 @@ const SideBar = ({updateCurrentSelected}) => {
           aria-labelledby="nested-list-subheader"
         >
           {breeds[breed].length === 0 ? (
-            <ListItemButton
-              onClick={handleClick}
-              id={breed}
-            >
+            <ListItemButton onClick={handleClick} id={breed}>
               <ListItemText primary={breed} />
             </ListItemButton>
           ) : (
@@ -70,7 +69,11 @@ const SideBar = ({updateCurrentSelected}) => {
               <Collapse in={open} timeout="auto" unmountOnExit>
                 {breeds[breed].map((subBreed, index) => (
                   <List key={index} component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} onClick={handleClick} id={breed+"/"+subBreed}>
+                    <ListItemButton
+                      sx={{ pl: 4 }}
+                      onClick={handleClick}
+                      id={breed + "/" + subBreed}
+                    >
                       <ListItemText primary={subBreed} />
                     </ListItemButton>
                   </List>
@@ -81,7 +84,6 @@ const SideBar = ({updateCurrentSelected}) => {
         </List>
       ))}
 
-
       {/*Hamburger Menu Mobile*/}
       <div
         onClick={() => setHamburgerMenu(!hamburgerMenu)}
@@ -90,7 +92,7 @@ const SideBar = ({updateCurrentSelected}) => {
         {hamburgerMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
       </div>
 
-      {hamburgerMenu ?
+      {hamburgerMenu ? (
         listOfBreeds.map((breed, index) => (
           <List
             className="flex flex-col justify-center items-center "
@@ -99,10 +101,7 @@ const SideBar = ({updateCurrentSelected}) => {
             aria-labelledby="nested-list-subheader"
           >
             {breeds[breed].length === 0 ? (
-              <ListItemButton
-                onClick={handleClick}
-                id={breed}
-              >
+              <ListItemButton onClick={handleClick} id={breed}>
                 <ListItemText primary={breed} />
               </ListItemButton>
             ) : (
@@ -114,7 +113,11 @@ const SideBar = ({updateCurrentSelected}) => {
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   {breeds[breed].map((subBreed, index) => (
                     <List key={index} component="div" disablePadding>
-                      <ListItemButton sx={{ pl: 4 }} onClick={handleClick} id={breed+"/"+subBreed}>
+                      <ListItemButton
+                        sx={{ pl: 4 }}
+                        onClick={handleClick}
+                        id={breed + "/" + subBreed}
+                      >
                         <ListItemText primary={subBreed} />
                       </ListItemButton>
                     </List>
@@ -123,7 +126,10 @@ const SideBar = ({updateCurrentSelected}) => {
               </>
             )}
           </List>
-        )) : <p className="hidden md:flex">Data is loading...</p>}
+        ))
+      ) : (
+        <p className="hidden md:flex">Data is loading...</p>
+      )}
     </div>
   );
 };

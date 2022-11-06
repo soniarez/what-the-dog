@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import SideBar from "../components/finderView/SideBar";
 import DogGallery from "../components/finderView/DogGallery";
+import DogCreeping from "../components/finderView/DogCreeping";
 
 const Finder = () => {
   const [selectedBreed, setSelectedBreed] = useState(["chihuahua"]);
@@ -22,9 +22,7 @@ const Finder = () => {
         <SideBar updateCurrentSelected={updateCurrentSelected} />
       </div>
       <div className=" flex flex-col justify-center items-center border-l border-gray-300 px-12 w-full">
-        <Link to="/">
-        <h1 className="text-center text-4xl font-black text-indigo-600 cursor-pointer">Find your Dog</h1>
-        </Link> 
+        <DogCreeping />
         <DogGallery selectedBreed={selectedBreed} />
       </div>
     </div>
