@@ -21,7 +21,7 @@ const Finder = () => {
         <SideBar updateCurrentSelected={updateCurrentSelected} />
       </div>
       <div className=" flex flex-col justify-center items-center border border-gray-500 px-12 w-full">
-        <h1 className="text-4xl font-semibold">Find your Dog</h1>
+        <h1 className="text-center text-4xl font-black text-indigo-600">Find your Dog</h1>
         <DogGallery selectedBreed={selectedBreed} />
       </div>
     </div>
