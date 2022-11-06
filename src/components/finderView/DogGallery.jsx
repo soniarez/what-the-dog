@@ -30,8 +30,8 @@ const DogGallery = ({ selectedBreed }) => {
   };
 
   return (
-    <div
-      key={selectedBreed.length}
+    <div 
+      key={selectedBreed}
       className="overflow-scroll overflow-x-hidden w-full h-screen"
     >
       <p className="text-center font-semibold my-4 cursor-default">
@@ -46,6 +46,8 @@ const DogGallery = ({ selectedBreed }) => {
                 src={item}
                 key={index}
                 alt="dog pictures"
+                role="img"
+                data-testid="dog-gallery"
               />
             ))
           ) : (

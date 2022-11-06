@@ -22,7 +22,7 @@ You can find it 👉
 ### Low Quality Prototype:
 ![Low-Quality-Prototype](/src/assets/images/low-prototype.png)
 
-## Color Pallete:
+## Color Palette:
 ![Color-Palette](/src/assets/images/color-pallete.png)
 
 ## Results:
