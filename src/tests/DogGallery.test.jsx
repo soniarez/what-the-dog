@@ -18,7 +18,7 @@ describe("Dog Gallery Component", () => {
         expect(subText).toBeInTheDocument();
     })
     
-    //Here I wanted to test tha the list of images are rendered. I tried with getByRole and getById but I couldn't make it work.
+    //Acá estaba tratando de testear que el componente renderice las imágenes de los perros, pero no me salió. Probé con getByRole, getByAltText, etc. pero no me funcionó.
     
  /*    it('alt contains correct value', () => {
         render(<ImageComponent size="large"/>)
