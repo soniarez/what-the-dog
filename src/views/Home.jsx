@@ -7,7 +7,9 @@ const Home = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-screen bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400">
-      <h1 className="text-center text-6xl text-white font-black cursor-default">What The Dog</h1>
+      <h1 className="text-center text-6xl text-white font-black cursor-default">
+        What The Dog
+      </h1>
       <img
         src={dogGif}
         className="w-48 h-48 rounded-2xl mt-20 shadow-2xl shadow-gray-900"

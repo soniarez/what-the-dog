@@ -30,11 +30,11 @@ const DogGallery = ({ selectedBreed }) => {
   };
 
   return (
-    <div 
+    <div
       key={selectedBreed}
       className="overflow-scroll overflow-x-hidden w-full h-screen"
     >
-      <p className="text-center font-semibold my-4 cursor-default">
+      <p className="text-center font-semibold text-indigo-600 my-4 cursor-default">
         Search your favorite dogs by bread or sub-breed!
       </p>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 3, 900: 4 }}>
