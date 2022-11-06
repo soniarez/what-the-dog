@@ -23,7 +23,7 @@ const DogGallery = ({ selectedBreed }) => {
       key={selectedBreed.length}
       className="overflow-scroll overflow-x-hidden w-full h-screen"
     >
-      <p className="text-center font-semibold my-4">
+      <p className="text-center font-semibold my-4 cursor-default">
         Search your favorite dogs by bread or subbreed!
       </p>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 3, 900: 4 }}>
