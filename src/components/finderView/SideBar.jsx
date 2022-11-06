@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from "react";
-import List from "@mui/material/List";
+import { FaBars, FaTimes } from "react-icons/fa";
+import List from "@mui/material/List";;
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import axios from "axios";
-import getBreedImages from "../../helpers/getBreedImages";
+import getAllBreedList from "../../helpers/getAllBreedList";
 
-const SideBar = () => {
+const SideBar = ({updateCurrentSelected}) => {
+  const [hamburgerMenu, setHamburgerMenu] = useState(false);
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(false);
   const [breeds, setBreeds] = useState([]);
 
   useEffect(() => {
     const getAllDogs = async () => {
       try {
-        const dogsFromApi = await fetchAllDogs();
-        dogConverter(dogsFromApi);
+        const dogsFromApi = await getAllBreedList();
+        breedArray(dogsFromApi);
         setBreeds(dogsFromApi.message);
-        const imagesFromApi = await getBreedImages("akita");
-        setDogImages(imagesFromApi)
       } catch (err) {
         console.log(err, "error fetching data from API");
       }
@@ -28,61 +26,51 @@ const SideBar = () => {
     getAllDogs();
   }, []);
 
-  //CONVERTING OBJECT INTO ARRAY
-  const dogConverter = (rawDogs) => {
-    for (const breed in rawDogs.message) {
-      return rawDogs.message[breed];
+  //CONVERTING OBJECT INTO ARRAY OF DOG BREEDS
+  const breedArray = (breedObjects) => {
+    for (const breed in breedObjects.message) {
+      return breedObjects.message[breed];
     }
   };
 
-  //FETCHING DOG DATA FROM API
-  const fetchAllDogs = async () => {
-    try {
-      let res = await axios.get("https://dog.ceo/api/breeds/list/all");
-      let breedsObject = await res.data;
-      return breedsObject;
-    } catch (err) {
-      if (err.response) {
-        console.log(err.response.status);
-        console.log(err.response.data);
-      }
-    }
+  const handleClick = (e) => {
+    updateCurrentSelected(e.currentTarget.id);
   };
 
-
-  const handleClick = () => {
+  const handleClickSubBreedsMenu = (e) => {
     setOpen(!open);
-  };
+  }
 
-  //aca estamos sacando una lista de nombres de perro exrtayendo las llaves esto es una lista de string
+  //Retrieving a list of dog's names by adding the keys, this is a list of strings.
   const listOfBreeds = Object.keys(breeds);
 
   return (
-    <div>
-      {listOfBreeds.map((dog, index) => (
+    <div className="overflow-scroll overflow-x-hidden h-screen ">
+      <h2 className="text-center text-lg text-indigo-600 font-black underline cursor-default">All Dog Breeds</h2>
+      {listOfBreeds.map((breed, index) => (
         <List
+          className="hidden md:flex md:flex-col md:justify-center md:items-center"
           key={index}
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
-          {breeds[dog].length === 0 ? (
+          {breeds[breed].length === 0 ? (
             <ListItemButton
-              selected={selected}
-              onClick={() => setSelected(!selected)}
+              onClick={handleClick}
+              id={breed}
             >
-              <ListItemText primary={dog} />
+              <ListItemText primary={breed} />
             </ListItemButton>
           ) : (
             <>
-              <ListItemButton onClick={handleClick}>
-                <ListItemText primary={dog} />
+              <ListItemButton onClick={handleClickSubBreedsMenu} id={breed}>
+                <ListItemText primary={breed} />
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                {breeds[dog].map((subBreed, _subIndex) => (
-                  <List key={_subIndex} component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                {breeds[breed].map((subBreed, index) => (
+                  <List key={index} component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }} onClick={handleClick} id={breed+"/"+subBreed}>
                       <ListItemText primary={subBreed} />
                     </ListItemButton>
                   </List>
@@ -92,6 +80,50 @@ const SideBar = () => {
           )}
         </List>
       ))}
+
+
+      {/*Hamburger Menu Mobile*/}
+      <div
+        onClick={() => setHamburgerMenu(!hamburgerMenu)}
+        className="cursor-pointer pr-4 z-10 md:hidden"
+      >
+        {hamburgerMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
+      </div>
+
+      {hamburgerMenu ?
+        listOfBreeds.map((breed, index) => (
+          <List
+            className="flex flex-col justify-center items-center "
+            key={index}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+          >
+            {breeds[breed].length === 0 ? (
+              <ListItemButton
+                onClick={handleClick}
+                id={breed}
+              >
+                <ListItemText primary={breed} />
+              </ListItemButton>
+            ) : (
+              <>
+                <ListItemButton onClick={handleClickSubBreedsMenu} id={breed}>
+                  <ListItemText primary={breed} />
+                  {open ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  {breeds[breed].map((subBreed, index) => (
+                    <List key={index} component="div" disablePadding>
+                      <ListItemButton sx={{ pl: 4 }} onClick={handleClick} id={breed+"/"+subBreed}>
+                        <ListItemText primary={subBreed} />
+                      </ListItemButton>
+                    </List>
+                  ))}
+                </Collapse>
+              </>
+            )}
+          </List>
+        )) : <p>Data is loading...</p>}
     </div>
   );
 };

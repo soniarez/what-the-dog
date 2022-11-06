@@ -1,6 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
 
 @tailwind base;
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+
 @tailwind components;
 @tailwind utilities;
 
@@ -8,7 +31,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Nunito';
-  font-weight: 400; 
 }
 
 @font-face {
@@ -23,4 +45,11 @@ body {
   src: url('assets/fonts/Nunito-SemiBold.ttf') format('truetype');
   font-style: normal;
   font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('assets/fonts/Nunito-Black.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 900;
 }

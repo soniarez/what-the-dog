@@ -1,11 +1,10 @@
 import axios from "axios";
 
-// FETCH ALL DOG IMAGES
-const getBreedImages = async (breedName) => {
+//FETCHING DOG NAMES FROM API
+const getAllBreedList = async () => {
     try {
-      let res = await axios.get(`https://dog.ceo/api/breed/${breedName}/images`);
+      let res = await axios.get("https://dog.ceo/api/breeds/list/all");
       let breedsObject = await res.data;
-      console.log(breedsObject, "breeds Obj Images")
       return breedsObject;
     } catch (err) {
       if (err.response) {
@@ -14,5 +13,7 @@ const getBreedImages = async (breedName) => {
       }
     }
   };
-  
-  export default getBreedImages;
+
+  export default getAllBreedList;
+
+
