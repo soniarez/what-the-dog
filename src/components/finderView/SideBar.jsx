@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import List from "@mui/material/List";
-import ListSubheader from '@mui/material/ListSubheader';
+import List from "@mui/material/List";;
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
@@ -46,13 +45,13 @@ const SideBar = ({updateCurrentSelected}) => {
   const listOfBreeds = Object.keys(breeds);
 
   return (
-    <div className="overflow-scroll overflow-x-hidden h-screen">
+    <div className="overflow-scroll overflow-x-hidden h-screen ">
       <h2 className="text-center text-indigo-600 font-extrabold underline">All Dog Breeds</h2>
       {listOfBreeds.map((breed, index) => (
         <List
           className="hidden md:flex md:flex-col md:justify-center md:items-center"
           key={index}
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+         /*  sx={{ width: "100%", maxWidth: 360 }} */
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
@@ -83,7 +82,7 @@ const SideBar = ({updateCurrentSelected}) => {
         </List>
       ))}
 
-      {/*Hambuerger Menu*/}
+      {/*Hamburger Menu Mobile*/}
       <div
         onClick={() => setHamburgerMenu(!hamburgerMenu)}
         className="cursor-pointer pr-4 z-10 md:hidden"
@@ -96,7 +95,7 @@ const SideBar = ({updateCurrentSelected}) => {
           <List
             className="flex flex-col justify-center items-center "
             key={index}
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            /* sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }} */
             component="nav"
             aria-labelledby="nested-list-subheader"
           >

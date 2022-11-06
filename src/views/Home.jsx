@@ -6,8 +6,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-screen dark:bg-white">
-      <h1 className="text-4xl font-semibold">What The Dog</h1>
+    <div className="flex flex-col justify-center items-center w-full h-screen bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400">
+      <h1 className="text-6xl text-white font-black">What The Dog</h1>
       <img
         src={dogGif}
         className="w-40 h-40 rounded-2xl mt-20"
