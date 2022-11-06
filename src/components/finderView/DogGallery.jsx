@@ -37,6 +37,7 @@ const DogGallery = ({ selectedBreed }) => {
                   src={item}
                   key={index}
                   alt="dog pictures"
+                  loading="lazy"
                   /* style={{ width: "100%", display: "block" }} */
                 />
               ))
