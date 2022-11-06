@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import dogImgUrl from "../../assets/images/courageNoEye.png";
+import dogEyeImgUrl from "../../assets/images/eyeHole1.png";
 
 const DogCreeping = () => {
-  const dogImgUrl = "../src/assets/images/courageNoEye.png";
-  const dogEyeImgUrl = "../src/assets/images/eyeHole1.png";
 
   const [MousePosition, setMousePosition] = useState({
     x: 0,
