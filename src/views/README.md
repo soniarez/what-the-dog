@@ -1,7 +1,7 @@
 # What The Dog 🐶
 
 ## Description
-A web-based application where you can serch dogs pictures by breed or sub-breed.
+A web-based application where you can serch dog pictures by breed or sub-breed.
 
 ## Demo
 You can find it 👉

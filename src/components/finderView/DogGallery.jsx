@@ -18,6 +18,16 @@ const DogGallery = ({ selectedBreed }) => {
     getAllImages();
   }, [selectedBreed]);
 
+  //IF THERE IS NO SELECTION
+  const emptySelection = () => {
+    if (dogImages.length === 0) {
+      return (
+        <p className="text-center text-m text-black cursor-default">
+          Ouch! Your have to select at least one doggo 🐶
+        </p>
+      );
+    }
+  };
 
   return (
     <div
@@ -25,23 +35,23 @@ const DogGallery = ({ selectedBreed }) => {
       className="overflow-scroll overflow-x-hidden w-full h-screen"
     >
       <p className="text-center font-semibold my-4 cursor-default">
-        Search your favorite dogs by bread or subbreed!
+        Search your favorite dogs by bread or sub-breed!
       </p>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 3, 900: 4 }}>
         <Masonry columnsCount={3} gutter="10px">
-          {dogImages.length > 0
-            ? dogImages.map((item, index) => (
-                
-                <img
-                  className="flex w-full rounded shadow-md hover:scale-105 duration-500"
-                  src={item}
-                  key={index}
-                  alt="dog pictures"
-                  /* style={{ width: "100%", display: "block" }} */
-                />
-              ))
-            : <p>Ouch! Select a doggo</p>}
-            
+          {dogImages ? (
+            dogImages.map((item, index) => (
+              <img
+                className="flex w-full rounded shadow-md hover:scale-105 duration-500"
+                src={item}
+                key={index}
+                alt="dog pictures"
+              />
+            ))
+          ) : (
+            <p>Doggos are loading...</p>
+          )}
+          {emptySelection()}
         </Masonry>
       </ResponsiveMasonry>
     </div>
