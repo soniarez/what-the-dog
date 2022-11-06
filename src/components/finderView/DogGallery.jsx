@@ -18,6 +18,7 @@ const DogGallery = ({ selectedBreed }) => {
     getAllImages();
   }, [selectedBreed]);
 
+
   return (
     <div
       key={selectedBreed.length}
@@ -30,6 +31,7 @@ const DogGallery = ({ selectedBreed }) => {
         <Masonry columnsCount={3} gutter="10px">
           {dogImages
             ? dogImages.map((item, index) => (
+                
                 <img
                   className="flex w-full rounded shadow-md hover:scale-105 duration-500"
                   src={item}
@@ -38,7 +40,8 @@ const DogGallery = ({ selectedBreed }) => {
                   /* style={{ width: "100%", display: "block" }} */
                 />
               ))
-            : null}
+            : <p>Data is loading...</p>}
+            
         </Masonry>
       </ResponsiveMasonry>
     </div>
