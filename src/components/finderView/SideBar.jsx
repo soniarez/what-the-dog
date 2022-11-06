@@ -123,7 +123,7 @@ const SideBar = ({updateCurrentSelected}) => {
               </>
             )}
           </List>
-        )) : <p>Data is loading...</p>}
+        )) : <p className="hidden md:flex">Data is loading...</p>}
     </div>
   );
 };
