@@ -4,7 +4,7 @@ import SideBar from "../components/finderView/SideBar";
 import DogGallery from "../components/finderView/DogGallery";
 
 const Finder = () => {
-  const [selectedBreed, setSelectedBreed] = useState(["akita"]);
+  const [selectedBreed, setSelectedBreed] = useState(["chihuahua"]);
 
   const updateCurrentSelected = (breedList) => {
     if (selectedBreed.indexOf(breedList) != -1) {
