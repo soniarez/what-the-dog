@@ -29,7 +29,7 @@ const DogGallery = ({ selectedBreed }) => {
       </p>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 3, 900: 4 }}>
         <Masonry columnsCount={3} gutter="10px">
-          {dogImages
+          {dogImages.length > 0
             ? dogImages.map((item, index) => (
                 
                 <img
@@ -37,11 +37,10 @@ const DogGallery = ({ selectedBreed }) => {
                   src={item}
                   key={index}
                   alt="dog pictures"
-                  loading="lazy"
                   /* style={{ width: "100%", display: "block" }} */
                 />
               ))
-            : <p>Data is loading...</p>}
+            : <p>Ouch! Select a doggo</p>}
             
         </Masonry>
       </ResponsiveMasonry>

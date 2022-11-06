@@ -46,7 +46,7 @@ const SideBar = ({updateCurrentSelected}) => {
 
   return (
     <div className="overflow-scroll overflow-x-hidden h-screen ">
-      <h2 className="text-center text-lg text-indigo-600 font-black underline">All Dog Breeds</h2>
+      <h2 className="text-center text-lg text-indigo-600 font-black underline cursor-default">All Dog Breeds</h2>
       {listOfBreeds.map((breed, index) => (
         <List
           className="hidden md:flex md:flex-col md:justify-center md:items-center"
