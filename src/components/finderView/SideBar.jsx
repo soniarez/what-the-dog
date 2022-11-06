@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import List from "@mui/material/List";
+import ListSubheader from '@mui/material/ListSubheader';
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
@@ -46,6 +47,7 @@ const SideBar = ({updateCurrentSelected}) => {
 
   return (
     <div className="overflow-scroll overflow-x-hidden h-screen">
+      <h2 className="text-center text-indigo-600 font-extrabold underline">All Dog Breeds</h2>
       {listOfBreeds.map((breed, index) => (
         <List
           className="hidden md:flex md:flex-col md:justify-center md:items-center"
@@ -100,21 +102,21 @@ const SideBar = ({updateCurrentSelected}) => {
           >
             {breeds[breed].length === 0 ? (
               <ListItemButton
-                selected={selected}
-                onClick={() => setSelected(!selected)}
+                onClick={handleClick}
+                id={breed}
               >
                 <ListItemText primary={breed} />
               </ListItemButton>
             ) : (
               <>
-                <ListItemButton onClick={handleClick}>
+                <ListItemButton onClick={handleClickSubBreedsMenu} id={breed}>
                   <ListItemText primary={breed} />
                   {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   {breeds[breed].map((subBreed, index) => (
                     <List key={index} component="div" disablePadding>
-                      <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemButton sx={{ pl: 4 }} onClick={handleClick} id={breed+"/"+subBreed}>
                         <ListItemText primary={subBreed} />
                       </ListItemButton>
                     </List>

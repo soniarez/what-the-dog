@@ -16,7 +16,7 @@ const Finder = () => {
   };
 
   return (
-    <div className="flex flex-row w-full h-full bg-white">
+    <div className="flex flex-row w-full h-screen overflow-auto bg-white">
       <div className="min-w-fit max-w-fit">
         <SideBar updateCurrentSelected={updateCurrentSelected} />
       </div>
