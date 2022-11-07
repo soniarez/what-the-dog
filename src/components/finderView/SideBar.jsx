@@ -12,7 +12,6 @@ const SideBar = ({ updateCurrentSelected, selectedBreed }) => {
   const [hamburgerMenu, setHamburgerMenu] = useState(false);
   const [open, setOpen] = useState(false);
   const [breeds, setBreeds] = useState([]);
-  const [selectedButtons, setSelectedButtons] = useState([]);
 
   useEffect(() => {
     const getAllDogs = async () => {
@@ -25,6 +24,7 @@ const SideBar = ({ updateCurrentSelected, selectedBreed }) => {
       }
     };
     getAllDogs();
+    console.log(selectedBreed, 'perros seleccionados');
   }, [selectedBreed]);
 
   //CONVERTING OBJECT INTO ARRAY OF DOG BREEDS
@@ -35,16 +35,13 @@ const SideBar = ({ updateCurrentSelected, selectedBreed }) => {
   };
 
   const handleClick = e => {
-    updateCurrentSelected(e.currentTarget.id);
-    //acceso a info de list ["afrikan", "chihuahua"]
-    //e.currenTarget.id = afrian
-
-    console.log(selectedBreed, 'perros seleccionados');
+    selectedBreed.includes(e.currentTarget.id);
     if (!selectedBreed.includes(e.currentTarget.id)) {
       e.currentTarget.style.backgroundColor = '#6b4ee5';
     } else {
-      e.currentTarget.style.backgroundColor = '#F2617A';
+      e.currentTarget.style.backgroundColor = '#f6e8f8';
     }
+    updateCurrentSelected(e.currentTarget.id);
   };
 
   //Retrieving a list of dog's names by adding the keys, this is a list of strings.
@@ -55,7 +52,6 @@ const SideBar = ({ updateCurrentSelected, selectedBreed }) => {
       <h2 className="text-center text-lg text-indigo-600 font-black underline cursor-default">
         All Dog Breeds
       </h2>
-      {selectedButtons === true ? <p>true</p> : <p>false</p>}
       {listOfBreeds.map((breed, index) => (
         <List
           className="hidden md:flex md:flex-col md:justify-center md:items-center"
