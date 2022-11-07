@@ -1,17 +1,19 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import dogImgUrl from "../../assets/images/courageNoEye.png";
 import dogEyeImgUrl from "../../assets/images/eyeHole1.png";
 
 const DogCreeping = () => {
-
   const [MousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
   });
 
   const navigate = useNavigate();
+
+  const anchor = useRef(null); // anchor is the center of the dog image to rotate around
+  const eyeLeftRef = useRef(null);
+  const eyeRightRef = useRef(null);
 
   useEffect(() => {
     window.addEventListener("mousemove", (ev) => handleMouseMove(ev));
@@ -22,14 +24,12 @@ const DogCreeping = () => {
     const mouseX = MousePosition.x;
     const mouseY = MousePosition.y;
 
-    const anchor = document.getElementById("dogLogo");
     const rekt = anchor.getBoundingClientRect();
     const anchorX = rekt.left + rekt.width / 2;
     const anchorY = rekt.top + rekt.height / 2;
 
     const angleDeg = angle(mouseX, mouseY, anchorX, anchorY);
-    const eyeLeft = document.getElementById("eyeLeft");
-    const eyeRight = document.getElementById("eyeRight");
+    
     eyeLeft.style.transform = `rotate(${90 + angleDeg}deg)`;
     eyeRight.style.transform = `rotate(${90 + angleDeg}deg)`;
 
@@ -39,7 +39,7 @@ const DogCreeping = () => {
   const angle = (cx, cy, ex, ey) => {
     const dy = ey - cy;
     const dx = ex - cx;
-    const rad = Math.atan2(dy, dx); // range -Pi, Pi for rotation onMouseMove={(ev)=> handleMouseMove(ev)}
+    const rad = Math.atan2(dy, dx); 
     const deg = (rad * 180) / Math.PI;
     return deg;
   };
@@ -51,18 +51,21 @@ const DogCreeping = () => {
     >
       <img
         id="dogLogo"
+        ref={anchor}
         className="h-[100px] w-[100px]"
         src={dogImgUrl}
         alt="courage the dog"
       ></img>
       <img
         id="eyeLeft"
+        ref={eyeLeftRef}
         className="absolute bottom-[71px] left-[26px] h-[22px] w-[22px]"
         src={dogEyeImgUrl}
         alt="dog left eye"
       ></img>
       <img
         id="eyeRight"
+        ref={eyeRightRef}
         className="absolute bottom-[77px] left-[61px] h-[19px] w-[19px]"
         src={dogEyeImgUrl}
         alt="dog right eye"
