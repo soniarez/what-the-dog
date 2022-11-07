@@ -1,44 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import getAllBreedList from "../../helpers/getAllBreedList";
+import React, { useState, useEffect } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import getAllBreedList from '../../helpers/getAllBreedList';
 
-const SideBar = ({ updateCurrentSelected }) => {
+const SideBar = ({ updateCurrentSelected, selectedBreed }) => {
   const [hamburgerMenu, setHamburgerMenu] = useState(false);
   const [open, setOpen] = useState(false);
   const [breeds, setBreeds] = useState([]);
+  const [selectedButtons, setSelectedButtons] = useState([]);
 
   useEffect(() => {
     const getAllDogs = async () => {
       try {
         const dogsFromApi = await getAllBreedList();
-        breedArray(dogsFromApi);
+        breedList(dogsFromApi);
         setBreeds(dogsFromApi.message);
       } catch (err) {
-        console.log(err, "error fetching data from API");
+        console.log(err, 'error fetching data from API');
       }
     };
     getAllDogs();
-  }, []);
+  }, [selectedBreed]);
 
   //CONVERTING OBJECT INTO ARRAY OF DOG BREEDS
-  const breedArray = (breedObjects) => {
+  const breedList = breedObjects => {
     for (const breed in breedObjects.message) {
       return breedObjects.message[breed];
     }
   };
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     updateCurrentSelected(e.currentTarget.id);
-  };
+    //acceso a info de list ["afrikan", "chihuahua"]
+    //e.currenTarget.id = afrian
 
-  const handleClickSubBreedsMenu = (e) => {
-    setOpen(!open);
+    console.log(selectedBreed, 'perros seleccionados');
+    if (!selectedBreed.includes(e.currentTarget.id)) {
+      e.currentTarget.style.backgroundColor = '#6b4ee5';
+    } else {
+      e.currentTarget.style.backgroundColor = '#F2617A';
+    }
   };
 
   //Retrieving a list of dog's names by adding the keys, this is a list of strings.
@@ -49,6 +55,7 @@ const SideBar = ({ updateCurrentSelected }) => {
       <h2 className="text-center text-lg text-indigo-600 font-black underline cursor-default">
         All Dog Breeds
       </h2>
+      {selectedButtons === true ? <p>true</p> : <p>false</p>}
       {listOfBreeds.map((breed, index) => (
         <List
           className="hidden md:flex md:flex-col md:justify-center md:items-center"
@@ -62,7 +69,7 @@ const SideBar = ({ updateCurrentSelected }) => {
             </ListItemButton>
           ) : (
             <>
-              <ListItemButton onClick={handleClickSubBreedsMenu} id={breed}>
+              <ListItemButton onClick={() => setOpen(!open)} id={breed}>
                 <ListItemText primary={breed} />
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
@@ -72,7 +79,7 @@ const SideBar = ({ updateCurrentSelected }) => {
                     <ListItemButton
                       sx={{ pl: 4 }}
                       onClick={handleClick}
-                      id={breed + "/" + subBreed}
+                      id={breed + '/' + subBreed}
                     >
                       <ListItemText primary={subBreed} />
                     </ListItemButton>
@@ -106,7 +113,7 @@ const SideBar = ({ updateCurrentSelected }) => {
                 </ListItemButton>
               ) : (
                 <>
-                  <ListItemButton onClick={handleClickSubBreedsMenu} id={breed}>
+                  <ListItemButton onClick={() => setOpen(!open)} id={breed}>
                     <ListItemText primary={breed} />
                     {open ? <ExpandLess /> : <ExpandMore />}
                   </ListItemButton>
@@ -116,7 +123,7 @@ const SideBar = ({ updateCurrentSelected }) => {
                         <ListItemButton
                           sx={{ pl: 4 }}
                           onClick={handleClick}
-                          id={breed + "/" + subBreed}
+                          id={breed + '/' + subBreed}
                         >
                           <ListItemText primary={subBreed} />
                         </ListItemButton>

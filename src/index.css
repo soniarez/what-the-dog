@@ -11,11 +11,12 @@
   scrollbar-color: var(--secondary) var(--primary);
 }
 
-
+/* Firefox */
 *::-webkit-scrollbar {
   width: 10px;
 }
 
+/* Chrome, Edge, and Safari */
 *::-webkit-scrollbar-track {
   background: var(--primary);
   border-radius: 3px;
