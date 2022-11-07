@@ -92,44 +92,42 @@ const SideBar = ({ updateCurrentSelected }) => {
         {hamburgerMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
       </div>
 
-      {hamburgerMenu ? (
-        listOfBreeds.map((breed, index) => (
-          <List
-            className="flex flex-col justify-center items-center "
-            key={index}
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-          >
-            {breeds[breed].length === 0 ? (
-              <ListItemButton onClick={handleClick} id={breed}>
-                <ListItemText primary={breed} />
-              </ListItemButton>
-            ) : (
-              <>
-                <ListItemButton onClick={handleClickSubBreedsMenu} id={breed}>
+      {hamburgerMenu
+        ? listOfBreeds.map((breed, index) => (
+            <List
+              className="flex flex-col justify-center items-center "
+              key={index}
+              component="nav"
+              aria-labelledby="nested-list-subheader"
+            >
+              {breeds[breed].length === 0 ? (
+                <ListItemButton onClick={handleClick} id={breed}>
                   <ListItemText primary={breed} />
-                  {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  {breeds[breed].map((subBreed, index) => (
-                    <List key={index} component="div" disablePadding>
-                      <ListItemButton
-                        sx={{ pl: 4 }}
-                        onClick={handleClick}
-                        id={breed + "/" + subBreed}
-                      >
-                        <ListItemText primary={subBreed} />
-                      </ListItemButton>
-                    </List>
-                  ))}
-                </Collapse>
-              </>
-            )}
-          </List>
-        ))
-      ) : (
-        <p className="hidden md:flex">Data is loading...</p>
-      )}
+              ) : (
+                <>
+                  <ListItemButton onClick={handleClickSubBreedsMenu} id={breed}>
+                    <ListItemText primary={breed} />
+                    {open ? <ExpandLess /> : <ExpandMore />}
+                  </ListItemButton>
+                  <Collapse in={open} timeout="auto" unmountOnExit>
+                    {breeds[breed].map((subBreed, index) => (
+                      <List key={index} component="div" disablePadding>
+                        <ListItemButton
+                          sx={{ pl: 4 }}
+                          onClick={handleClick}
+                          id={breed + "/" + subBreed}
+                        >
+                          <ListItemText primary={subBreed} />
+                        </ListItemButton>
+                      </List>
+                    ))}
+                  </Collapse>
+                </>
+              )}
+            </List>
+          ))
+        : null}
     </div>
   );
 };

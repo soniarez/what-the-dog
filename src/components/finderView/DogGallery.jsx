@@ -32,13 +32,13 @@ const DogGallery = ({ selectedBreed }) => {
   return (
     <div
       key={selectedBreed}
-      className="overflow-scroll overflow-x-hidden w-full h-screen"
+      className="overflow-scroll overflow-x-hidden w-full h-screen p-4"
     >
       <p className="text-center font-semibold text-indigo-600 my-4 cursor-default">
         Search your favorite dogs by bread or sub-breed!
       </p>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 3, 900: 4 }}>
-        <Masonry columnsCount={3} gutter="10px">
+        <Masonry columnsCount={3} gutter="10px" >
           {dogImages ? (
             dogImages.map((item, index) => (
               <img

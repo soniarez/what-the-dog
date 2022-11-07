@@ -18,10 +18,10 @@ const Finder = () => {
 
   return (
     <div className="flex flex-row w-full h-screen overflow-auto bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-pink-100 via-violet-100 to-purple-100">
-      <div className="min-w-fit max-w-fit">
+      <div className="w-[10%] min-w-[120px] max-w-[120px]">
         <SideBar updateCurrentSelected={updateCurrentSelected} />
       </div>
-      <div className=" flex flex-col justify-center items-center border-l border-gray-300 px-12 w-full">
+      <div className=" flex flex-col justify-center items-center border-l border-gray-300 mx-0 w-full">
         <DogCreeping />
         <DogGallery selectedBreed={selectedBreed} />
       </div>
