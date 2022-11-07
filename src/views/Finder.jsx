@@ -11,15 +11,15 @@ const Finder = () => {
       selectedBreed.splice(selectedBreed.indexOf(breedList), 1);
       setSelectedBreed([...selectedBreed]);
     } else {
-      setSelectedBreed((current) => [...current, breedList]);
-      console.log(selectedBreed);
+      setSelectedBreed((current) => [...current, breedList]);  
     }
   };
+
 
   return (
     <div className="flex flex-row w-full h-screen overflow-auto bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-pink-100 via-violet-100 to-purple-100">
       <div className="w-[10%] min-w-[120px] max-w-[120px]">
-        <SideBar updateCurrentSelected={updateCurrentSelected} />
+        <SideBar updateCurrentSelected={updateCurrentSelected} selectedBreed={selectedBreed} />
       </div>
       <div className=" flex flex-col justify-center items-center border-l border-gray-300 mx-0 w-full">
         <DogCreeping />
