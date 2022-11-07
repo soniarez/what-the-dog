@@ -10,8 +10,7 @@ const DogCreeping = () => {
   });
 
   const navigate = useNavigate();
-
-  const anchor = useRef(null); // anchor is the center of the dog image to rotate around
+  const anchor = useRef(null);
   const eyeLeftRef = useRef(null);
   const eyeRightRef = useRef(null);
 
@@ -23,8 +22,7 @@ const DogCreeping = () => {
     setMousePosition({ x: ev.clientX, y: ev.clientY });
     const mouseX = MousePosition.x;
     const mouseY = MousePosition.y;
-
-    const rekt = anchor.getBoundingClientRect();
+    const rekt = anchor.current.getBoundingClientRect();
     const anchorX = rekt.left + rekt.width / 2;
     const anchorY = rekt.top + rekt.height / 2;
 
@@ -39,7 +37,7 @@ const DogCreeping = () => {
   const angle = (cx, cy, ex, ey) => {
     const dy = ey - cy;
     const dx = ex - cx;
-    const rad = Math.atan2(dy, dx); 
+    const rad = Math.atan2(dy, dx); // range -Pi, Pi for rotation onMouseMove={(ev)=> handleMouseMove(ev)}
     const deg = (rad * 180) / Math.PI;
     return deg;
   };

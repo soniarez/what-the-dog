@@ -2,25 +2,28 @@
 
 @tailwind base;
 
-/* Firefox */
+:root {
+  --primary: rgb(168, 123, 213);
+  --secondary: rgb(151, 183, 243);
+}
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--secondary) var(--primary);
 }
 
-/* Chrome, Edge, and Safari */
+
 *::-webkit-scrollbar {
-  width: 15px;
+  width: 10px;
 }
 
 *::-webkit-scrollbar-track {
   background: var(--primary);
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: var(--secondary);
-  border-radius: 14px;
+  border-radius: 12px;
   border: 3px solid var(--primary);
 }
 
