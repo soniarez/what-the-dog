@@ -16,7 +16,7 @@ describe('Dog Gallery Component', () => {
       </Router>
     );
     const subText = screen.getByText(
-      'Search your favorite dogs by bread or sub-breed!'
+      'Search your favorite dogs by breed or sub-breed!'
     );
     expect(subText).toBeInTheDocument();
   });

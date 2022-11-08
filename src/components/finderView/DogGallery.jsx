@@ -51,7 +51,7 @@ const DogGallery = ({ selectedBreed }) => {
               />
             ))
           ) : (
-            <p>Doggos are loading...</p>
+            <p>Wait a second, doggos are loading...</p>
           )}
           {emptySelection()}
         </Masonry>
